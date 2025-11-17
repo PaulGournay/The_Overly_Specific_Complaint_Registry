@@ -1,4 +1,4 @@
-The Overly Specific Complaint Registry
+# The Overly Specific Complaint Registry
 
 A small web app for collecting extremely specific and mildly ridiculous complaints.
 Built for fun, learning, and because overly-specific annoyances deserve a home.
