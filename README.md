@@ -14,12 +14,15 @@ b.Go to phpMyAdmin
 c.Create a database named complaint_registry
 d.Import the SQL file-->The file includes example users, categories, and complaints.
 
-2. Run the Client
-   
-cd client
-npm install
-npm run dev--> in root directory
+2. Install all necessary module (in cmd)
 
+npm install
+cd client && npm install && cd ..
+cd server && npm install && cd ..
+   
+3. Run the project
+
+npm run dev
 
 ## 🧪 Example Accounts
 
