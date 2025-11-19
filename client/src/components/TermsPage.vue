@@ -8,7 +8,7 @@
       <section class="policy-section">
         <h2>1. Acceptance of Terms</h2>
         <p>
-          By using The Overly Specific Complaint Registry, you agree to abide by these terms of service. 
+          By using The Unnecessary Complaint Registry, you agree to abide by these terms of service. 
           If you do not agree, please do not use our platform.
         </p>
       </section>
@@ -60,7 +60,7 @@
       <section class="policy-section">
         <h2>6. Limitation of Liability</h2>
         <p>
-          The Overly Specific Complaint Registry is provided "as is." We are not liable for any indirect, 
+          The Unnecessary Complaint Registry is provided "as is." We are not liable for any indirect, 
           incidental, or consequential damages arising from your use of our platform.
         </p>
       </section>

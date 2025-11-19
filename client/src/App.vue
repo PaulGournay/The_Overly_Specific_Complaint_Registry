@@ -3,12 +3,12 @@
     <header class="app-header">
       <div class="header-left">
         <img src="./assets/logo.png" alt="Logo" class="header-logo" />
-        <h1 class="header-title">The Overly Specific Complaint Registry</h1>
+        <h1 class="header-title">The Unnecessary Complaint Registery</h1>
       </div>
 
       <nav class="header-nav">
         <!-- Navigation Links -->
-        <div class="nav-links" v-if="!user">
+        <div class="nav-links" v-if="!user"><!-- check if a user is logged in-->
           <button @click="currentView = 'Home'" class="nav-button">Home</button>
           <button @click="currentView = 'About'" class="nav-button">About</button>
           <button @click="currentView = 'Contact'" class="nav-button">Contact</button>
@@ -16,7 +16,7 @@
 
         <!-- User Authenticated Navigation -->
         <div class="nav-links" v-else>
-          <button @click="currentView = 'ComplaintList'" class="nav-button">Registry</button>
+          <button @click="currentView = 'ComplaintList'" class="nav-button">Complains Page</button>
           <span class="user-welcome">{{ user.username }}</span>
         </div>
 
@@ -146,8 +146,8 @@ export default {
 }
 
 .header-title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 750;
   color: #1a1a1a;
   margin: 0;
   white-space: nowrap;
@@ -267,6 +267,7 @@ export default {
   .header-left {
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .header-title {

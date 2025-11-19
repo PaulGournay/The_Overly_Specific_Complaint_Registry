@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-section">
-        <h3 class="footer-title">The Overly Specific Complaint Registry</h3>
+        <h3 class="footer-title">The Unnecessary Complaint Registry</h3>
         <p class="footer-description">A platform dedicated to the art of hyper-specific complaints.</p>
       </div>
       
@@ -25,7 +25,7 @@
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; 2025 The Overly Specific Complaint Registry. All rights reserved.</p>
+      <p>&copy; 2025 The Unnecessary Complaint Registry. All rights reserved.</p>
     </div>
   </footer>
 </template>

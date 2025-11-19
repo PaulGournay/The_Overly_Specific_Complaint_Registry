@@ -3,6 +3,39 @@
     <div class="page-header">
       <h1>About Us</h1>
     </div>
+    <section class="team-section">
+        <h2>Meet the Team</h2>
+        <p class="team-intro">
+          We are EFREI Paris students currently on a mobility study exchange at APU Kuala Lumpur. 
+          This project was created as part of our Advanced Web Programming course.
+        </p>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-image-wrapper">
+              <img src="../assets/about_image/about_Paul.png" alt="Paul GOURNAY" class="member-image" />
+            </div>
+            <h3 class="member-name">Paul GOURNAY</h3>
+            
+          </div>
+
+          <div class="team-member">
+            <div class="member-image-wrapper">
+              <img src="../assets/about_image/about_Maxime.jpeg" alt="Maxime BERGER" class="member-image" />
+            </div>
+            <h3 class="member-name">Maxime BERGER</h3>
+            
+          </div>
+
+          <div class="team-member">
+            <div class="member-image-wrapper">
+              <img src="../assets/about_image/about_Clayton.png" alt="Clayton HABYALIMANA" class="member-image" />
+            </div>
+            <h3 class="member-name">Clayton HABYALIMANA</h3>
+            
+          </div>
+        </div>
+      </section>
 
     <div class="content">
       <section class="section">
@@ -42,6 +75,7 @@
           specificity is celebrated, and shared grievances create community.
         </p>
       </section>
+
     </div>
   </div>
 </template>
@@ -60,13 +94,14 @@
   text-align: center;
   margin-bottom: 50px;
   padding-bottom: 20px;
-  border-bottom: 3px solid #667eea;
+  border-bottom: 3px solid #1a1a1a;
 }
 
 .page-header h1 {
   font-size: 36px;
-  color: #2c3e50;
+  color: #1a1a1a;
   margin: 0;
+  font-weight: 700;
 }
 
 .content {
@@ -79,13 +114,14 @@
   padding: 25px;
   background: #f9f9f9;
   border-radius: 8px;
-  border-left: 4px solid #667eea;
+  border-left: 4px solid #1a1a1a;
 }
 
 .section h2 {
   margin-top: 0;
-  color: #2c3e50;
+  color: #1a1a1a;
   font-size: 22px;
+  font-weight: 700;
 }
 
 .section p {
@@ -102,5 +138,109 @@
 
 .section li {
   margin: 10px 0;
+}
+
+/* Team Section */
+.team-section {
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.team-section h2 {
+  text-align: center;
+  color: #1a1a1a;
+  font-size: 28px;
+  margin: 0 0 15px 0;
+  font-weight: 700;
+}
+
+.team-intro {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin: 0 0 40px 0;
+  line-height: 1.6;
+}
+
+.team-grid {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.member-image-wrapper {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.member-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header {
+    margin-bottom: 30px;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+  .content {
+    gap: 25px;
+  }
+
+  .section {
+    padding: 20px;
+  }
+
+  .section h2 {
+    font-size: 18px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .member-image-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+
+  .member-name {
+    font-size: 18px;
+  }
 }
 </style>
