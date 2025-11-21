@@ -8,25 +8,24 @@
       <section class="policy-section">
         <h2>1. Acceptance of Terms</h2>
         <p>
-          By using The Unnecessary Complaint Registry, you agree to abide by these terms of service. 
-          If you do not agree, please do not use our platform.
+          By using The Unnecessary Complaint Registry, you agree to abide by these terms
+          of service. If you do not agree, please do not use our platform.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>2. User Accounts</h2>
         <p>
-          You are responsible for maintaining the confidentiality of your account credentials. You agree to 
-          provide accurate information during registration and to keep your information up to date. You are 
-          responsible for all activity that occurs under your account.
+          You are responsible for maintaining the confidentiality of your account
+          credentials. You agree to provide accurate information during registration and
+          to keep your information up to date. You are responsible for all activity that
+          occurs under your account.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>3. User Conduct</h2>
-        <p>
-          Users agree not to:
-        </p>
+        <p>Users agree not to:</p>
         <ul>
           <li>Submit complaints that are illegal, harmful, or abusive</li>
           <li>Harass, bully, or discriminate against other users</li>
@@ -39,15 +38,17 @@
       <section class="policy-section">
         <h2>4. Content Ownership</h2>
         <p>
-          Users retain ownership of the complaints they submit. By submitting content to our registry, 
-          you grant us the right to display, archive, and share your complaints publicly on our platform.
+          Users retain ownership of the complaints they submit. By submitting content to
+          our registry, you grant us the right to display, archive, and share your
+          complaints publicly on our platform.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>5. Archivist Responsibilities</h2>
         <p>
-          Archivists have been granted special privileges to maintain the registry. They agree to:
+          Archivists have been granted special privileges to maintain the registry. They
+          agree to:
         </p>
         <ul>
           <li>Act in good faith and in the best interest of the community</li>
@@ -60,31 +61,32 @@
       <section class="policy-section">
         <h2>6. Limitation of Liability</h2>
         <p>
-          The Unnecessary Complaint Registry is provided "as is." We are not liable for any indirect, 
-          incidental, or consequential damages arising from your use of our platform.
+          The Unnecessary Complaint Registry is provided "as is." We are not liable for
+          any indirect, incidental, or consequential damages arising from your use of our
+          platform.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>7. Termination</h2>
         <p>
-          We reserve the right to terminate or suspend accounts that violate these terms or engage in 
-          harmful behavior. Users may delete their accounts at any time.
+          We reserve the right to terminate or suspend accounts that violate these terms
+          or engage in harmful behavior. Users may delete their accounts at any time.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>8. Changes to Terms</h2>
         <p>
-          We may modify these terms at any time. Continued use of the platform constitutes acceptance 
-          of the updated terms.
+          We may modify these terms at any time. Continued use of the platform constitutes
+          acceptance of the updated terms.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>9. Contact for Legal Inquiries</h2>
         <p>
-          For legal inquiries or concerns, please contact us at 
+          For legal inquiries or concerns, please contact us at
           <a href="mailto:legal@complaintregistry.com">legal@complaintregistry.com</a>
         </p>
       </section>
@@ -92,8 +94,7 @@
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .policy-page {

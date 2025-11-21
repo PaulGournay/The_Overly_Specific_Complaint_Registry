@@ -4,84 +4,97 @@
       <h1>About Us</h1>
     </div>
     <section class="team-section">
-        <h2>Meet the Team</h2>
-        <p class="team-intro">
-          We are EFREI Paris students currently on a mobility study exchange at APU Kuala Lumpur. 
-          This project was created as part of our Advanced Web Programming course.
-        </p>
-        
-        <div class="team-grid">
-          <div class="team-member">
-            <div class="member-image-wrapper">
-              <img src="../assets/about_image/about_Paul.png" alt="Paul GOURNAY" class="member-image" />
-            </div>
-            <h3 class="member-name">Paul GOURNAY</h3>
-            
-          </div>
+      <h2>Meet the Team</h2>
+      <p class="team-intro">
+        We are EFREI Paris students currently on a mobility study exchange at APU Kuala
+        Lumpur. This project was created as part of our Advanced Web Programming course.
+      </p>
 
-          <div class="team-member">
-            <div class="member-image-wrapper">
-              <img src="../assets/about_image/about_Maxime.jpeg" alt="Maxime BERGER" class="member-image" />
-            </div>
-            <h3 class="member-name">Maxime BERGER</h3>
-            
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img
+              src="../assets/about_image/about_Paul.png"
+              alt="Paul GOURNAY"
+              class="member-image"
+            />
           </div>
-
-          <div class="team-member">
-            <div class="member-image-wrapper">
-              <img src="../assets/about_image/about_Clayton.png" alt="Clayton HABYALIMANA" class="member-image" />
-            </div>
-            <h3 class="member-name">Clayton HABYALIMANA</h3>
-            
-          </div>
+          <h3 class="member-name">Paul GOURNAY</h3>
         </div>
-      </section>
+
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img
+              src="../assets/about_image/about_Maxime.jpeg"
+              alt="Maxime BERGER"
+              class="member-image"
+            />
+          </div>
+          <h3 class="member-name">Maxime BERGER</h3>
+        </div>
+
+        <div class="team-member">
+          <div class="member-image-wrapper">
+            <img
+              src="../assets/about_image/about_Clayton.png"
+              alt="Clayton HABYALIMANA"
+              class="member-image"
+            />
+          </div>
+          <h3 class="member-name">Clayton HABYALIMANA</h3>
+        </div>
+      </div>
+    </section>
 
     <div class="content">
       <section class="section">
         <h2>Our Mission</h2>
         <p>
-          To provide a safe haven for the expression of extraordinarily specific complaints. We believe that 
-          every grievance, no matter how niche, deserves to be documented, shared, and appreciated by those 
-          who understand.
+          To provide a safe haven for the expression of extraordinarily specific
+          complaints. We believe that every grievance, no matter how niche, deserves to be
+          documented, shared, and appreciated by those who understand.
         </p>
       </section>
 
       <section class="section">
         <h2>Why This Exists</h2>
         <p>
-          Sometimes the most relatable complaints are the ones only you seem to have. That specific sound your 
-          refrigerator makes. That particular way your phone screen gets smudged. The unique arrangement of steps 
-          that causes your foot to land wrong. These are the moments we celebrate.
+          Sometimes the most relatable complaints are the ones only you seem to have. That
+          specific sound your refrigerator makes. That particular way your phone screen
+          gets smudged. The unique arrangement of steps that causes your foot to land
+          wrong. These are the moments we celebrate.
         </p>
       </section>
 
       <section class="section">
         <h2>Our Community</h2>
-        <p>
-          We have two types of users:
-        </p>
+        <p>We have two types of users:</p>
         <ul>
-          <li><strong>Complainers:</strong> People who lodge and upvote complaints. You know who you are.</li>
-          <li><strong>Archivists:</strong> Dedicated individuals who maintain the integrity of our registry and keep things organized.</li>
+          <li>
+            <strong>Complainers:</strong> People who lodge and upvote complaints. You know
+            who you are.
+          </li>
+          <li>
+            <strong>Archivists:</strong> Dedicated individuals who maintain the integrity
+            of our registry and keep things organized.
+          </li>
         </ul>
       </section>
 
       <section class="section">
         <h2>How We Started</h2>
         <p>
-          This registry was born from a simple observation: complaints are often dismissed as negativity, 
-          when in fact they're expressions of standards and expectations. We've created a space where 
-          specificity is celebrated, and shared grievances create community.
+          This registry was born from a simple observation: complaints are often dismissed
+          as negativity, when in fact they're expressions of standards and expectations.
+          We've created a space where specificity is celebrated, and shared grievances
+          create community.
         </p>
       </section>
-
     </div>
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .about-page {
@@ -166,7 +179,7 @@
 }
 
 .team-grid {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 40px;
@@ -205,7 +218,6 @@
   color: #1a1a1a;
   margin: 0 0 10px 0;
 }
-
 
 /* Responsive Design */
 @media (max-width: 768px) {

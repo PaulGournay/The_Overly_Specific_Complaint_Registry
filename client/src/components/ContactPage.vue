@@ -79,18 +79,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const form = ref({
-  name: '',
-  email: '',
-  subject: '',
-  message: '',
+  name: "",
+  email: "",
+  subject: "",
+  message: "",
 });
 
-const submitMessage = ref('');
-
-
+const submitMessage = ref("");
 </script>
 
 <style scoped>

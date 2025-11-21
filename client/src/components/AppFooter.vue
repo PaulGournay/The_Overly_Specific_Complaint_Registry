@@ -3,36 +3,42 @@
     <div class="footer-container">
       <div class="footer-section">
         <h3 class="footer-title">The Unnecessary Complaint Registry</h3>
-        <p class="footer-description">A platform dedicated to the art of hyper-specific complaints.</p>
+        <p class="footer-description">
+          A platform dedicated to the art of hyper-specific complaints.
+        </p>
       </div>
-      
+
       <div class="footer-section">
         <h4 class="footer-subtitle">Quick Links</h4>
         <nav class="footer-nav">
           <button @click="$emit('navigate', 'Home')" class="footer-link">Home</button>
           <button @click="$emit('navigate', 'About')" class="footer-link">About</button>
-          <button @click="$emit('navigate', 'Contact')" class="footer-link">Contact</button>
+          <button @click="$emit('navigate', 'Contact')" class="footer-link">
+            Contact
+          </button>
         </nav>
       </div>
-      
+
       <div class="footer-section">
         <h4 class="footer-subtitle">Legal</h4>
         <nav class="footer-nav">
-          <button @click="$emit('navigate', 'Privacy')" class="footer-link">Privacy Policy</button>
-          <button @click="$emit('navigate', 'Terms')" class="footer-link">Terms of Service</button>
+          <button @click="$emit('navigate', 'Privacy')" class="footer-link">
+            Privacy Policy
+          </button>
+          <button @click="$emit('navigate', 'Terms')" class="footer-link">
+            Terms of Service
+          </button>
         </nav>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>&copy; 2025 The Unnecessary Complaint Registry. All rights reserved.</p>
     </div>
   </footer>
 </template>
 
-<script setup>
-
-</script>
+<script setup></script>
 
 <style scoped>
 .footer {

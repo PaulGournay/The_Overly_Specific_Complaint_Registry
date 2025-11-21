@@ -7,7 +7,9 @@
         <p class="hero-subtitle">Where every grievance finds its perfect niche</p>
         <div class="hero-actions">
           <button @click="$emit('navigate', 'Login')" class="btn-primary">Login</button>
-          <button @click="$emit('navigate', 'Register')" class="btn-secondary">Register</button>
+          <button @click="$emit('navigate', 'Register')" class="btn-secondary">
+            Register
+          </button>
         </div>
       </div>
     </section>
@@ -19,9 +21,10 @@
         <div class="section-content">
           <h2>What is This?</h2>
           <p>
-            Ever experienced a complaint so specific that nobody else could possibly understand how much it bothers you? 
-            You've come to the right place. Our registry celebrates the art of hyper-specific complaints, from 
-            the existential dread of laundry to acoustic annoyances that drive you up the wall.
+            Ever experienced a complaint so specific that nobody else could possibly
+            understand how much it bothers you? You've come to the right place. Our
+            registry celebrates the art of hyper-specific complaints, from the existential
+            dread of laundry to acoustic annoyances that drive you up the wall.
           </p>
         </div>
       </section>
@@ -31,10 +34,22 @@
         <div class="section-content">
           <h2>How It Works</h2>
           <ol class="steps-list">
-            <li><strong>Register:</strong> Create an account to join our community of complainers.</li>
-            <li><strong>Lodge Your Complaint:</strong> Submit your most specific grievance with all the glorious detail.</li>
-            <li><strong>Upvote:</strong> Help others discover complaints they didn't know they shared.</li>
-            <li><strong>Archive:</strong> Archivists keep our collection organized and pristine.</li>
+            <li>
+              <strong>Register:</strong> Create an account to join our community of
+              complainers.
+            </li>
+            <li>
+              <strong>Lodge Your Complaint:</strong> Submit your most specific grievance
+              with all the glorious detail.
+            </li>
+            <li>
+              <strong>Upvote:</strong> Help others discover complaints they didn't know
+              they shared.
+            </li>
+            <li>
+              <strong>Archive:</strong> Archivists keep our collection organized and
+              pristine.
+            </li>
           </ol>
         </div>
       </section>
@@ -65,24 +80,35 @@
         <h2>Ready to Share Your Complaint?</h2>
         <p>Join thousands of complainers who understand the art of specificity.</p>
         <div class="cta-actions">
-          <button @click="$emit('navigate', 'Register')" class="btn-primary-large">Get Started Now</button>
-          <button @click="$emit('navigate', 'Login')" class="btn-secondary-large">Already a Member? Login</button>
+          <button @click="$emit('navigate', 'Register')" class="btn-primary-large">
+            Get Started Now
+          </button>
+          <button @click="$emit('navigate', 'Login')" class="btn-secondary-large">
+            Already a Member? Login
+          </button>
         </div>
       </section>
     </div>
 
     <!-- Floating Action Buttons (Always Visible) -->
     <div class="floating-actions">
-      <button @click="$emit('navigate', 'Login')" class="float-btn login-btn" title="Login">
+      <button
+        @click="$emit('navigate', 'Login')"
+        class="float-btn login-btn"
+        title="Login"
+      >
         <span>Login</span>
       </button>
-      <button @click="$emit('navigate', 'Register')" class="float-btn register-btn" title="Register">
+      <button
+        @click="$emit('navigate', 'Register')"
+        class="float-btn register-btn"
+        title="Register"
+      >
         <span>Register</span>
       </button>
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .home-page {
@@ -93,9 +119,8 @@
 
 /* Hero Section */
 .hero {
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-    url('../assets/HomePageBG.png');
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url("../assets/HomePageBG.png");
   background-size: cover;
   background-position: center;
   padding: 80px 30px;

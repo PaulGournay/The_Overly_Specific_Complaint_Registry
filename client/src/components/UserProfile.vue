@@ -1,13 +1,13 @@
 <template>
   <div class="profile-container">
     <h2>My Profile</h2>
-    
+
     <div class="profile-card">
       <div class="pfp-section">
         <h3>Choose your Avatar</h3>
         <div class="pfp-grid">
-          <div 
-            v-for="option in pfpOptions" 
+          <div
+            v-for="option in pfpOptions"
             :key="option"
             class="pfp-option"
             :class="{ active: selectedPfp === option }"
@@ -33,74 +33,73 @@
         <button type="submit" class="save-btn">Save Changes</button>
       </form>
 
-      <p v-if="message" :class="{'success': !error, 'error': error}">{{ message }}</p>
+      <p v-if="message" :class="{ success: !error, error: error }">{{ message }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 // Import the images explicitly so Vue includes them in the build
 // Note: Ensure your folder is named exactly 'pfp_image' inside assets
-import pfp1 from '@/assets/pfp_image/pfp1.jpeg';
-import pfp2 from '@/assets/pfp_image/pfp2.jpeg';
-import pfp3 from '@/assets/pfp_image/pfp3.jpeg';
-import pfp4 from '@/assets/pfp_image/pfp4.jpeg';
+import pfp1 from "@/assets/pfp_image/pfp1.jpeg";
+import pfp2 from "@/assets/pfp_image/pfp2.jpeg";
+import pfp3 from "@/assets/pfp_image/pfp3.jpeg";
+import pfp4 from "@/assets/pfp_image/pfp4.jpeg";
 
 export default {
-  name: 'UserProfile',
-  props: ['user', 'token'],
-  emits: ['user-updated'],
+  name: "UserProfile",
+  props: ["user", "token"],
+  emits: ["user-updated"],
   data() {
     return {
       // Map the filenames to the imported objects
       pfpMap: {
-        'pfp1.jpeg': pfp1,
-        'pfp2.jpeg': pfp2,
-        'pfp3.jpeg': pfp3,
-        'pfp4.jpeg': pfp4
+        "pfp1.jpeg": pfp1,
+        "pfp2.jpeg": pfp2,
+        "pfp3.jpeg": pfp3,
+        "pfp4.jpeg": pfp4,
       },
       // The list of options to iterate over
-      pfpOptions: ['pfp1.jpeg', 'pfp2.jpeg', 'pfp3.jpeg', 'pfp4.jpeg'],
-      
-      selectedPfp: this.user.pfp || 'pfp1.jpeg',
+      pfpOptions: ["pfp1.jpeg", "pfp2.jpeg", "pfp3.jpeg", "pfp4.jpeg"],
+
+      selectedPfp: this.user.pfp || "pfp1.jpeg",
       username: this.user.username,
-      message: '',
-      error: false
+      message: "",
+      error: false,
     };
   },
   methods: {
     getImgUrl(name) {
-       // Return the imported image from the map
-       return this.pfpMap[name] || this.pfpMap['pfp1.jpeg'];
+      // Return the imported image from the map
+      return this.pfpMap[name] || this.pfpMap["pfp1.jpeg"];
     },
     async updateProfile() {
-      this.message = '';
+      this.message = "";
       this.error = false;
 
       try {
         const response = await axios.put(
-          'http://localhost:3000/api/users/profile',
+          "http://localhost:3000/api/users/profile",
           {
             username: this.username,
             // Password is no longer sent
-            pfp: this.selectedPfp
+            pfp: this.selectedPfp,
           },
           {
-            headers: { 'Authorization': `Bearer ${this.token}` }
+            headers: { Authorization: `Bearer ${this.token}` },
           }
         );
 
-        this.message = 'Profile updated!';
-        this.$emit('user-updated', response.data.user);
-        
+        this.message = "Profile updated!";
+        this.$emit("user-updated", response.data.user);
       } catch (err) {
         this.error = true;
-        this.message = err.response ? err.response.data.message : 'Update failed.';
+        this.message = err.response ? err.response.data.message : "Update failed.";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -175,6 +174,12 @@ export default {
 .save-btn:hover {
   background-color: #34495e;
 }
-.success { color: green; margin-top: 10px;}
-.error { color: red; margin-top: 10px; }
+.success {
+  color: green;
+  margin-top: 10px;
+}
+.error {
+  color: red;
+  margin-top: 10px;
+}
 </style>

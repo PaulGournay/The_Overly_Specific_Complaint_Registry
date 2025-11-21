@@ -8,7 +8,8 @@
       <section class="policy-section">
         <h2>1. Information We Collect</h2>
         <p>
-          We collect information you provide directly to us, such as when you register an account or submit complaints:
+          We collect information you provide directly to us, such as when you register an
+          account or submit complaints:
         </p>
         <ul>
           <li>Username and password (securely hashed)</li>
@@ -32,39 +33,42 @@
       <section class="policy-section">
         <h2>3. Data Security</h2>
         <p>
-          Your password is hashed using industry-standard bcrypt encryption. We use JWT tokens for secure 
-          authentication. All data is stored in our secure MySQL database.
+          Your password is hashed using industry-standard bcrypt encryption. We use JWT
+          tokens for secure authentication. All data is stored in our secure MySQL
+          database.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>4. Your Rights</h2>
         <p>
-          You have the right to access, modify, or delete your account and associated complaints at any time. 
-          Archivists have the authority to remove complaints that violate our community standards.
+          You have the right to access, modify, or delete your account and associated
+          complaints at any time. Archivists have the authority to remove complaints that
+          violate our community standards.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>5. Third-Party Services</h2>
         <p>
-          We do not sell or share your personal information with third parties. Our platform is self-contained 
-          and does not integrate with external tracking services.
+          We do not sell or share your personal information with third parties. Our
+          platform is self-contained and does not integrate with external tracking
+          services.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>6. Changes to This Policy</h2>
         <p>
-          We may update this privacy policy from time to time. We will notify users of any material changes 
-          by posting the updated policy on our site.
+          We may update this privacy policy from time to time. We will notify users of any
+          material changes by posting the updated policy on our site.
         </p>
       </section>
 
       <section class="policy-section">
         <h2>7. Contact Us</h2>
         <p>
-          If you have questions about this privacy policy, please contact us at 
+          If you have questions about this privacy policy, please contact us at
           <a href="mailto:privacy@complaintregistry.com">privacy@complaintregistry.com</a>
         </p>
       </section>
@@ -72,8 +76,7 @@
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
 .policy-page {
