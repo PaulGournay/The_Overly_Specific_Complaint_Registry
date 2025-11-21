@@ -17,7 +17,15 @@
         <!-- User Authenticated Navigation -->
         <div class="nav-links" v-else>
           <button @click="currentView = 'ComplaintList'" class="nav-button">Complains Page</button>
-          <span class="user-welcome">{{ user.username }}</span>
+
+          <div class="user-profile-nav" @click="currentView = 'UserProfile'">
+            <div class="pfp-circle">
+              <img :src="getUserPfpUrl(user.pfp)" alt="PFP" class="pfp-img" />
+            </div>
+            <button class="user-welcome-btn">
+              {{ user.username }}
+            </button>
+          </div>
         </div>
 
         <!-- Auth Buttons / Logout -->
@@ -26,8 +34,10 @@
             <button @click="currentView = 'Login'" class="btn-login">Login</button>
             <button @click="currentView = 'Register'" class="btn-register">Register</button>
           </template>
+          <template v-else-if="user.role==archivist">
+            <span class="user-role">(admin)</span>
+          </template>
           <template v-else>
-            <span class="user-role">({{ user.role }})</span>
             <button @click="logout" class="btn-logout">Logout</button>
           </template>
         </div>
@@ -43,6 +53,12 @@
       <Register v-else-if="currentView === 'Register'" @registered="currentView = 'Login'" />
       <Login v-else-if="currentView === 'Login'" @login-success="handleLogin" />
       <ComplaintList v-else-if="user && currentView === 'ComplaintList'" :user="user" :token="token" />
+      <UserProfile 
+        v-else-if="user && currentView === 'UserProfile'" 
+        :user="user" 
+        :token="token" 
+        @user-updated="handleUserUpdate" 
+      />
       <div v-else-if="!user && currentView === 'ComplaintList'">
         <h2>Please Login or Register to view the complaints.</h2>
       </div>
@@ -62,7 +78,11 @@ import AboutPage from './components/AboutPage.vue';
 import ContactPage from './components/ContactPage.vue';
 import PrivacyPage from './components/PrivacyPage.vue';
 import TermsPage from './components/TermsPage.vue';
-
+import UserProfile from './components/UserProfile.vue';
+import pfp1 from '@/assets/pfp_image/pfp1.jpeg';
+import pfp2 from '@/assets/pfp_image/pfp2.jpeg';
+import pfp3 from '@/assets/pfp_image/pfp3.jpeg';
+import pfp4 from '@/assets/pfp_image/pfp4.jpeg';
 export default {
   name: 'App',
   components: {
@@ -75,12 +95,19 @@ export default {
     ContactPage,
     PrivacyPage,
     TermsPage,
+    UserProfile,
   },
   data() {
     return {
       user: null, // Stores { id, username, role }
       token: null, // Stores JWT
-      currentView: 'Home', 
+      currentView: 'Home',
+      pfpMap: {
+        'pfp1.jpeg': pfp1,
+        'pfp2.jpeg': pfp2,
+        'pfp3.jpeg': pfp3,
+        'pfp4.jpeg': pfp4
+      }, 
     };
   },
   methods: {
@@ -107,7 +134,16 @@ export default {
         this.user = JSON.parse(storedUser);
         this.currentView = 'ComplaintList';
       }
-    }
+    },
+    handleUserUpdate(updatedUser) {
+        this.user = updatedUser;
+        // Update local storage so refresh keeps the new pic
+        localStorage.setItem('userInfo', JSON.stringify(this.user));
+    },
+    getUserPfpUrl(pfpName) {
+        if(!pfpName) pfpName = 'pfp1.jpeg';
+        return this.pfpMap[pfpName] || this.pfpMap['pfp1.jpeg'];
+    },
   },
   mounted() {
     this.checkLocalStorage();
@@ -255,6 +291,52 @@ export default {
 .content {
   padding: 20px;
 }
+.user-profile-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 30px; /* Pill shape */
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.user-profile-nav:hover {
+  background-color: #f8f9fa;
+  border-color: #e0e0e0;
+}
+
+.pfp-circle {
+  /* FORCE HEADER SIZE */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden; /* Cuts the image */
+  border: 2px solid #e0e0e0;
+  background-color: #fff;
+  flex-shrink: 0; /* Prevents circle from squishing if username is long */
+}
+
+.pfp-img {
+  /* Forces image to fit the 40px circle */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Crops center, maintains aspect ratio */
+  display: block;
+}
+
+.user-welcome-btn {
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  color: #2c3e50;
+  padding: 0;
+}
+
+/* Mobile Adjustment */
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -290,5 +372,9 @@ export default {
     width: 100%;
     justify-content: center;
   }
+  .user-welcome-btn {
+    display: none; /* Hide name on mobile to save space, keep pfp */
+  }
+  
 }
 </style>

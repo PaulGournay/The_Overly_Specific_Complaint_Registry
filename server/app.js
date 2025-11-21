@@ -113,6 +113,7 @@ app.post("/api/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    // Fetch PFP as well
     const [rows] = await dbPool.query(
       "SELECT * FROM users WHERE username = ?",
       [username]
@@ -127,7 +128,12 @@ app.post("/api/login", async (req, res) => {
       res.json({
         message: "Login successful!",
         token: token,
-        user: { id: user.id, username: user.username, role: user.role },
+        user: {
+          id: user.id,
+          username: user.username,
+          role: user.role,
+          pfp: user.pfp,
+        },
       });
     } else {
       res.status(401).json({ message: "Incorrect password." });
@@ -231,7 +237,27 @@ app.put("/api/complaints/:id", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Error updating complaint." });
   }
 });
+// UPDATE User Profile
+app.put("/api/users/profile", authenticateToken, async (req, res) => {
+  try {
+    const { username, pfp } = req.body;
+    const userId = req.user.id;
 
+    // We only update username and pfp now. Password logic is removed.
+    const query = "UPDATE users SET username = ?, pfp = ? WHERE id = ?";
+    const params = [username, pfp, userId];
+
+    await dbPool.query(query, params);
+
+    res.json({
+      message: "Profile updated successfully",
+      user: { id: userId, username, role: req.user.role, pfp },
+    });
+  } catch (error) {
+    console.error("Profile update error:", error);
+    res.status(500).json({ message: "Failed to update profile." });
+  }
+});
 // DELETE a complaint (Archivist only)
 app.delete(
   "/api/complaints/:id",
