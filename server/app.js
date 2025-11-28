@@ -167,6 +167,17 @@ app.get("/api/complaints", async (req, res) => {
   }
 });
 
+app.get("/api/users", async (req, res) => {
+  try{
+    const query = `SELECT id, username, pfp FROM users WHERE username != "admin"`;
+    const [users] = await dbPool.query(query);
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error fetching users." });
+  }
+})
+
 // INSERT a new complaint (Complainer/Authenticated)
 app.post("/api/complaints", authenticateToken, async (req, res) => {
   try {
@@ -274,6 +285,25 @@ app.delete(
     }
   }
 );
+
+app.delete(
+  "/api/users/delete/:id",
+  authenticateToken,
+  archivistOnly,
+  async (req, res) => {
+    try {
+      const id = req.params.id;
+      const query1 = "DELETE FROM complaints WHERE user_id = ?";
+      const query2 = "DELETE FROM users WHERE id = ?";
+      await dbPool.query(query1, [id]);
+      await dbPool.query(query2, [id]);
+      res.json({ message: "User banned by Archivist." });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error banning user." });
+    }
+  }
+)
 
 // --- CATEGORY READ ROUTE ---
 

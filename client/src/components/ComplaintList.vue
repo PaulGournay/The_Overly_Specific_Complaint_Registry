@@ -3,6 +3,14 @@
     <div class="search-and-form">
       <input v-model="searchQuery" placeholder="Search complaints..." />
 
+      <div v-if="user.role === 'archivist'" class="list_user">
+        <div v-for="person in users" :key="person.id">
+          <img :src="getImgUrl(person.pfp)" alt="PFP" />
+          <p>{{ person.username }}</p>
+          <button @click="banUser(person.id)">BAN</button>
+        </div>
+      </div>
+
       <div v-if="user.role === 'complainer'" class="new-complaint-form">
         <h3>Submit a New Overly Specific Complaint</h3>
         <form @submit.prevent="submitComplaint">
@@ -87,6 +95,11 @@
 <script>
 import axios from "axios";
 
+import pfp1 from "@/assets/pfp_image/pfp1.jpeg";
+import pfp2 from "@/assets/pfp_image/pfp2.jpeg";
+import pfp3 from "@/assets/pfp_image/pfp3.jpeg";
+import pfp4 from "@/assets/pfp_image/pfp4.jpeg";
+
 export default {
   name: "ComplaintList",
   props: ["user", "token"],
@@ -94,6 +107,13 @@ export default {
     return {
       complaints: [],
       categories: [],
+      users: [],
+      pfpMap: {
+        "pfp1.jpeg": pfp1,
+        "pfp2.jpeg": pfp2,
+        "pfp3.jpeg": pfp3,
+        "pfp4.jpeg": pfp4,
+      },
       newComplaint: {
         title: "",
         detail: "",
@@ -139,6 +159,16 @@ export default {
         console.error("Error fetching complaints:", error);
       }
     },
+    async fetchUsers() {
+      try {
+        const response2 = await axios.get("http://localhost:3000/api/users");
+        this.users = response2.data;
+        console.log(this.users);
+        console.table(this.users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    },
     async submitComplaint() {
       try {
         await this.api.post("/complaints", this.newComplaint);
@@ -179,6 +209,20 @@ export default {
         console.error("Error deleting complaint:", error);
       }
     },
+    async banUser(id) {
+      if (!confirm("Are you sure you want to ban this user ?")) return;
+      try {
+        await this.api.delete(`/users/delete/${id}`);
+
+        const response = await axios.get("http://localhost:3000/api/users");
+        this.users = response.data;
+        const response2 = await axios.get("http://localhost:3000/api/complaints");
+        this.complaints = response2.data;
+      } catch (error) {
+        alert(error.response.data.message || "Failed to ban user.");
+        console.error("Error banning user:", error);
+      }
+    },
     startEdit(complaint) {
       // Create a shallow copy for editing
       this.editingComplaint = { ...complaint };
@@ -207,10 +251,15 @@ export default {
         console.error("Error updating complaint:", error);
       }
     },
+    getImgUrl(name) {
+      // Return the imported image from the map
+      return this.pfpMap[name] || this.pfpMap["pfp1.jpeg"];
+    },
   },
   mounted() {
     this.fetchCategories();
     this.fetchComplaints();
+    this.fetchUsers();
   },
 };
 </script>
@@ -291,5 +340,96 @@ export default {
 .edit-form textarea,
 .edit-form select {
   margin-bottom: 5px;
+}
+.list_user {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0 18px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.45); /* translucent card like iOS sheets */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(15, 15, 15, 0.04);
+}
+
+/* Each user entry (direct children of .list_user) - now full-width vertical list items */
+.list_user > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* align content to the left so avatar + meta stack horizontally */
+  gap: 12px;
+  padding: 12px;
+  width: 100%;           /* full width to form a vertical list */
+  max-width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  /* subtle separator between items */
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+}
+
+/* remove bottom border on last item to keep clean card look */
+.list_user > div:last-child {
+  border-bottom: none;
+}
+
+/* subtle hover / focus */
+.list_user > div:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(15, 15, 15, 0.06);
+}
+
+/* avatar */
+.list_user > div img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 10px rgba(10, 10, 10, 0.05);
+}
+
+/* username + meta column */
+.list_user > div p {
+  margin: 0;
+  font-weight: 600;
+  color: #0b0b0b;
+  line-height: 1;
+}
+
+/* keep action (BAN) aligned to the right */
+.list_user > div button {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #ff3b30;
+  font-weight: 700;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 140ms ease;
+}
+
+.list_user > div button:hover,
+.list_user > div button:focus {
+  background: rgba(255,59,48,0.08);
+  outline: none;
+}
+
+/* responsive adjustments */
+@media (max-width: 680px) {
+  .list_user {
+    gap: 10px;
+    padding: 10px;
+  }
+  .list_user > div {
+    min-width: 100%;
+    padding: 10px;
+  }
 }
 </style>

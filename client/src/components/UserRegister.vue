@@ -42,7 +42,6 @@ export default {
           password: this.password,
           role: role,
         });
-
         this.message = response.data.message + " Redirecting to login...";
         setTimeout(() => {
           this.$emit("registered");
