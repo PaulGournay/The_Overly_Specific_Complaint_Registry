@@ -1,18 +1,21 @@
 <template>
   <div class="complaint-list">
+
+    <div v-if="user.role === 'archivist'" class="list_user">
+        <div v-for="person in users" :key="person.id">
+          <img :src="getImgUrl(person.pfp)" alt="PFP" />
+          <p>{{ person.username }}</p>
+          <button @click="banUser(person.id)" class="icon-btn delete-btn">BAN</button>
+        </div>
+      </div>
+
     <div class="search-and-form">
       <div class="search-wrapper">
         <span class="search-icon">🔍</span>
         <input v-model="searchQuery" placeholder="Search complaints..." class="search-input" />
       </div>
 
-      <div v-if="user.role === 'archivist'" class="list_user">
-        <div v-for="person in users" :key="person.id">
-          <img :src="getImgUrl(person.pfp)" alt="PFP" />
-          <p>{{ person.username }}</p>
-          <button @click="banUser(person.id)">BAN</button>
-        </div>
-      </div>
+      
 
       <div v-if="user.role === 'complainer'" class="new-complaint-form">
         <h3>Submit a New Overly Specific Complaint</h3>
@@ -58,7 +61,6 @@
       <div class="card-footer">
         <span class="score-badge">Specificity: {{ complaint.specificity_score }}</span>
 
-        <div class="action-buttons">
           <button 
             v-if="user.role === 'complainer'" 
             @click="upvoteComplaint(complaint)" 
@@ -77,13 +79,20 @@
           </button>
 
           <button
+          v-if="user.role === 'archivist'"
+          @click="resetVote(complaint)"
+          class="icon-btn reset-btn"
+          >
+            Reset Score
+          </button>
+
+          <button
             v-if="user.role === 'archivist'"
             @click="deleteComplaint(complaint.id)"
             class="icon-btn delete-btn"
           >
             Archive
           </button>
-        </div>
       </div>
 
       <div
@@ -202,6 +211,16 @@ export default {
         this.complaints.sort((a, b) => b.specificity_score - a.specificity_score);
       } catch (error) {
         alert("Failed to upvote complaint.");
+      }
+    },
+    async resetVote(complaint){
+      if (!confirm("Are you sure you want to reset the vote for this complaint ?")) return;
+      try {
+        await this.api.put(`/complaints/reset/${complaint.id}`);
+        complaint.specificity_score = 0;
+        this.fetchComplaints();
+      } catch(error){
+        alert("Failed to reset vote count");
       }
     },
     async deleteComplaint(id) {
@@ -413,6 +432,7 @@ export default {
 .action-buttons {
   display: flex;
   gap: 10px;
+  justify-content: space-between;
 }
 
 .icon-btn {
@@ -428,6 +448,10 @@ export default {
 
 .upvote-btn { color: #007aff; }
 .upvote-btn:hover { background-color: #f0f8ff; }
+
+.reset-btn {color: #000;}
+.reset-btn:hover {background-color: #fff5ff;}
+
 
 .edit-btn { color: #ff9500; }
 .edit-btn:hover { background-color: #fff8eb; }
@@ -482,7 +506,5 @@ export default {
   width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
 }
 .list_user p { margin: 0; font-weight: 600; flex-grow: 1;}
-.list_user button {
-  background: #ff3b30; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer;
-}
+
 </style>

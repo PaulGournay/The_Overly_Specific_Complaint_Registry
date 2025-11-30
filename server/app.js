@@ -221,6 +221,18 @@ app.put("/api/complaints/upvote/:id", authenticateToken, async (req, res) => {
   }
 });
 
+app.put("/api/complaints/reset/:id", authenticateToken, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const query = "UPDATE complaints SET specificity_score = 0 WHERE id = ?";
+    await dbPool.query(query, [id]);
+    res.json({message: "Specificity score reset. "});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({message: "Error resetting score. "});
+  }
+})
+
 // UPDATE a user's own complaint (Complainer/Authenticated)
 app.put("/api/complaints/:id", authenticateToken, async (req, res) => {
   try {
@@ -271,6 +283,7 @@ app.put("/api/users/profile", authenticateToken, async (req, res) => {
     res.status(500).json({ message: "Failed to update profile." });
   }
 });
+
 // DELETE a complaint (Archivist only)
 app.delete(
   "/api/complaints/:id",
