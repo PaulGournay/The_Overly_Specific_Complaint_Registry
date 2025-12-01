@@ -202,6 +202,22 @@ app.put("/api/complaints/upvote/:id", authenticateToken, async (req, res) => {
   }
 });
 
+// UPDATE complaint specificity score (downvote) (Authenticated - Complainer)
+app.put("/api/complaints/downvote/:id", authenticateToken, async (req, res) => {
+  try {
+    const id = req.params.id;
+    // Simple increment
+    await dbPool.query(
+      "UPDATE complaints SET specificity_score = specificity_score - 1 WHERE id = ?",
+      [id]
+    );
+    res.json({ message: "Specificity score downdated." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error downvoting complaint." });
+  }
+});
+
 // UPDATE a user's own complaint (Complainer/Authenticated)
 app.put("/api/complaints/:id", authenticateToken, async (req, res) => {
   try {

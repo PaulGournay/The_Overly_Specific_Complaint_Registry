@@ -39,6 +39,13 @@
         </button>
 
         <button 
+          v-if="user.role === 'complainer'" 
+          @click="DownvoteComplaint(complaint)"
+        >
+          Downvote (-1 Specificity)
+        </button>
+
+        <button 
           v-if="user.id === complaint.complainer_id && !editingComplaint" 
           @click="startEdit(complaint)"
         >
@@ -151,6 +158,20 @@ export default {
       } catch (error) {
         alert('Failed to upvote complaint.');
         console.error('Error upvoting complaint:', error);
+      }
+    },
+    async DownvoteComplaint(complaint) {
+      try {
+        await this.api.put(`/complaints/downvote/${complaint.id}`);
+        
+        // Optimistically update the local score
+        complaint.specificity_score--;
+        // Re-sort the array manually since the score changed
+        this.complaints.sort((a, b) => b.specificity_score - a.specificity_score); 
+
+      } catch (error) {
+        alert('Failed to downvote complaint.');
+        console.error('Error downvoting complaint:', error);
       }
     },
     async deleteComplaint(id) {
