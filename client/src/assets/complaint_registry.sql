@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 30 nov. 2025 à 09:52
+-- Généré le : mar. 02 déc. 2025 à 06:43
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -57,6 +57,34 @@ INSERT INTO `complaints` (`id`, `title`, `detail`, `specificity_score`, `user_id
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `contact_messages`
+--
+
+CREATE TABLE `contact_messages` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `contact_messages`
+--
+
+INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `created_at`) VALUES
+(2, 'Grandma Margaret', 'margaret1954@aol.com', 'Where is the Google?', 'I am trying to find the recipe for chicken pot pie. This website is not helping. Please delete this internet page and bring back the Google.', '2025-12-02 04:28:23'),
+(3, 'Karen B.', 'speaktoyour@manager.com', 'The Blue is too Loud', 'The specific shade of blue used on the \"Submit\" button is extremely aggressive. It feels like it is yelling at me to click it. I prefer a more passive-aggressive beige.', '2025-12-02 04:28:23'),
+(4, 'Alex Dev', 'alex@frontend.com', 'Feature Request: Dark Mode', 'Love the concept! But my eyes are burning at 3 AM while reading about \"Wet Socks.\" Please add a Dark Mode toggle in the header. Thanks!', '2025-12-02 04:28:23'),
+(5, 'Sarah Jenkins', 's.jenkins@gmail.com', 'Bug with Profile Picture', 'Hi Admin, just letting you know that when I try to switch from pfp1 to pfp3, it sometimes lags and doesn\'t update the header immediately. Might be a local storage issue?', '2025-12-02 04:28:23'),
+(6, 'Pizza Lover', 'hungry@dude.com', 'Order #4421', 'Where is my large pepperoni pizza? It has been 45 minutes. If this is not Domino\'s, why does your website look so delicious?', '2025-12-02 04:28:23'),
+(7, 'Niche Finder', 'fan@mail.com', 'Finally, I feel seen', 'I just wanted to say thank you. I thought I was the only person in the world who hated the sound of people chewing bananas. This site is therapy.', '2025-12-02 04:28:23'),
+(8, 'Grammar Police', 'correct@typo.com', 'Typo in the Footer', 'You missed a comma in the Terms of Service on line 42. As an Archivist of grammar, I demand you fix this immediately or I will file a formal complaint.', '2025-12-02 04:28:23');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `users`
 --
 
@@ -92,6 +120,12 @@ ALTER TABLE `complaints`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Index pour la table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `users`
 --
 ALTER TABLE `users`
@@ -107,6 +141,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `complaints`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT pour la table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `users`
