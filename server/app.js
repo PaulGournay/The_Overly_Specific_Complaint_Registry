@@ -349,6 +349,57 @@ app.delete(
     }
   }
 );
+// --- CONTACT FORM ROUTES ---
+app.post("/api/contact", async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+
+    if (!name || !email || !subject || !message) {
+      return res.status(400).json({ message: "All fields are required." });
+    }
+
+    await dbPool.query(
+      "INSERT INTO contact_messages (name, email, subject, message) VALUES (?, ?, ?, ?)",
+      [name, email, subject, message]
+    );
+
+    res.status(201).json({ message: "Message sent successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to send message." });
+  }
+});
+app.get(
+  "/api/admin/messages",
+  authenticateToken,
+  archivistOnly,
+  async (req, res) => {
+    try {
+      const [messages] = await dbPool.query(
+        "SELECT * FROM contact_messages ORDER BY created_at DESC"
+      );
+      res.json(messages);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error fetching messages." });
+    }
+  }
+);
+app.delete(
+  "/api/admin/messages/:id",
+  authenticateToken,
+  archivistOnly,
+  async (req, res) => {
+    try {
+      const id = req.params.id;
+      await dbPool.query("DELETE FROM contact_messages WHERE id = ?", [id]);
+      res.json({ message: "Message deleted." });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error deleting message." });
+    }
+  }
+);
 
 // Start the server
 app.listen(port, () => {

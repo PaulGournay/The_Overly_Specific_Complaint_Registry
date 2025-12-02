@@ -5,7 +5,7 @@
         <div class="logo-container" @click="currentView = 'Home'">
           <img src="./assets/logo.png" alt="Logo" class="header-logo" />
         </div>
-        <h1 class="header-title">Unnecessary Complaint Registery</h1>
+        <h1 class="header-title">Unnecessary Complaint Registry</h1>
       </div>
 
       <nav class="header-nav">
@@ -22,6 +22,14 @@
             :class="{ active: currentView === 'ComplaintList' }"
           >
             Complaints
+          </button>
+          <button
+            v-if="user.role === 'archivist'"
+            @click="currentView = 'AdminMessages'"
+            class="nav-button"
+            :class="{ active: currentView === 'AdminMessages' }"
+          >
+            Inbox
           </button>
 
           <div class="user-profile-nav" @click="currentView = 'UserProfile'">
@@ -78,6 +86,10 @@
         :token="token"
         @user-updated="handleUserUpdate"
       />
+      <AdminMessages
+        v-else-if="user && user.role === 'archivist' && currentView === 'AdminMessages'"
+        :token="token"
+      />
       <div v-else-if="!user && currentView === 'ComplaintList'">
         <h2>Please Login or Register to view the complaints.</h2>
       </div>
@@ -98,6 +110,7 @@ import ContactPage from "./components/ContactPage.vue";
 import PrivacyPage from "./components/PrivacyPage.vue";
 import TermsPage from "./components/TermsPage.vue";
 import UserProfile from "./components/UserProfile.vue";
+import AdminMessages from "./components/AdminMessages.vue";
 import pfp1 from "@/assets/pfp_image/pfp1.jpeg";
 import pfp2 from "@/assets/pfp_image/pfp2.jpeg";
 import pfp3 from "@/assets/pfp_image/pfp3.jpeg";
@@ -115,6 +128,7 @@ export default {
     PrivacyPage,
     TermsPage,
     UserProfile,
+    AdminMessages,
   },
   data() {
     return {
@@ -172,7 +186,8 @@ export default {
 
 <style>
 /* --- Global Reset & Font --- */
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -187,7 +202,6 @@ body, html {
   background-color: #f2f2f7; /* iOS Grouped Background */
   min-height: 100vh;
 }
-
 
 /* --- Glassmorphic Header --- */
 .app-header {
@@ -346,7 +360,7 @@ body, html {
   text-transform: uppercase;
 }
 .content.flex-1 {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 /* --- Mobile --- */
 @media (max-width: 768px) {
@@ -365,6 +379,4 @@ body, html {
     font-size: 18px;
   }
 }
-
-
 </style>
