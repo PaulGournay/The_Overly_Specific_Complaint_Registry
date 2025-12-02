@@ -112,10 +112,20 @@ app.post("/api/register", async (req, res) => {
 app.post("/api/login", async (req, res) => {
   try {
     const { username, password } = req.body;
-    const [rows] = await dbPool.query(
-      "SELECT * FROM users WHERE username = ?",
-      [username]
-    );
+    let rows;
+    if (username.includes('@')) {
+      [rows] = await dbPool.query(
+        "SELECT * FROM users WHERE email = ?",
+        [username]
+      );
+    } else {
+      [rows] = await dbPool.query(
+        "SELECT * FROM users WHERE username = ?",
+        [username]
+      );
+    }
+
+
 
     if (rows.length === 0)
       return res.status(404).json({ message: "User not found." });

@@ -10,7 +10,7 @@
         <div class="input-group">
           <input 
             v-model="username" 
-            placeholder="Username" 
+            placeholder="Username or email" 
             class="ios-input" 
             required 
           />
