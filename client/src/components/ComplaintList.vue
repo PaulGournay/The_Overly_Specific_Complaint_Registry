@@ -146,7 +146,6 @@ export default {
   data() {
     return {
       complaints: [],
-      // categories: [], // REMOVED
       users: [],
       pfpMap: {
         "pfp1.jpeg": pfp1,
@@ -157,7 +156,7 @@ export default {
       newComplaint: {
         title: "",
         detail: "",
-        category: "", // Changed from category_id
+        category: "",
       },
       editingComplaint: null,
       searchQuery: "",
@@ -169,7 +168,7 @@ export default {
         (c) =>
           c.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           c.detail.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          c.category.toLowerCase().includes(this.searchQuery.toLowerCase()) // Added search by category
+          c.category.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
       return filtered.sort((a, b) => b.specificity_score - a.specificity_score);
     },
@@ -200,13 +199,12 @@ export default {
     async submitComplaint() {
       try {
         await this.api.post("/complaints", this.newComplaint);
-        this.newComplaint = { title: "", detail: "", category: "" }; // Reset category string
+        this.newComplaint = { title: "", detail: "", category: "" };
         await this.fetchComplaints();
       } catch (error) {
         alert("Failed to submit complaint.");
       }
     },
-    // ... [Upvote, Downvote, Reset, Delete, Ban remain exactly the same] ...
 
     async upvoteComplaint(complaint) {
       // Prevent duplicate clicks locally
@@ -214,14 +212,12 @@ export default {
 
       try {
         await this.api.put(`/complaints/upvote/${complaint.id}`);
-
-        // Optimistic UI Update
         if (complaint.user_vote === "down") {
-          complaint.specificity_score += 2; // Swap
+          complaint.specificity_score += 2;
         } else {
-          complaint.specificity_score += 1; // New
+          complaint.specificity_score += 1;
         }
-        complaint.user_vote = "up"; // Set state
+        complaint.user_vote = "up";
 
         this.sortComplaints(); // Helper to re-sort list
       } catch (error) {
@@ -253,13 +249,8 @@ export default {
 
       try {
         await this.api.put(`/complaints/reset/${complaint.id}`);
-
-        // UI Updates:
         complaint.specificity_score = 0; // Reset score number
-        complaint.user_vote = null; // IMPORTANT: Reset the user's vote status so they can vote again
-
-        // Optional: Reload fresh data to be safe
-        // this.fetchComplaints();
+        complaint.user_vote = null;
       } catch (error) {
         console.error(error);
         alert("Failed to reset.");
@@ -268,8 +259,6 @@ export default {
     async DownvoteComplaint(complaint) {
       try {
         await this.api.put(`/complaints/downvote/${complaint.id}`);
-
-        // Optimistically update the local score
         complaint.specificity_score--;
         // Re-sort the array manually since the score changed
         this.complaints.sort((a, b) => b.specificity_score - a.specificity_score);
@@ -297,7 +286,6 @@ export default {
 
       try {
         await this.api.delete(`/users/delete/${id}`);
-
         // Refresh both lists to remove the banned user's content
         await this.fetchUsers();
         await this.fetchComplaints();
@@ -315,7 +303,6 @@ export default {
     },
     async updateComplaint() {
       try {
-        // Changed category_id to category
         const { id, title, detail, category } = this.editingComplaint;
         await this.api.put(`/complaints/${id}`, { title, detail, category });
 
@@ -323,7 +310,7 @@ export default {
         if (index !== -1) {
           this.complaints[index].title = title;
           this.complaints[index].detail = detail;
-          this.complaints[index].category = category; // Update local string
+          this.complaints[index].category = category;
         }
         this.cancelEdit();
       } catch (error) {
@@ -336,7 +323,6 @@ export default {
     },
   },
   mounted() {
-    // Removed fetchCategories
     this.fetchComplaints();
     this.fetchUsers();
   },
@@ -344,7 +330,6 @@ export default {
 </script>
 
 <style scoped>
-/* Re-using your exact existing styles to maintain homogeneity */
 .complaint-list {
   max-width: 700px;
   margin: 0 auto;
@@ -459,7 +444,6 @@ export default {
   border-radius: 10px;
   font-weight: 600;
   font-size: 11px;
-  /* Removed text-transform: uppercase to respect user typing */
 }
 
 /* Card Content */

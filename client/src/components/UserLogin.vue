@@ -8,23 +8,23 @@
 
       <form @submit.prevent="handleLogin" class="ios-form">
         <div class="input-group">
-          <input 
-            v-model="username" 
-            placeholder="Username or email" 
-            class="ios-input" 
-            required 
+          <input
+            v-model="username"
+            placeholder="Username or email"
+            class="ios-input"
+            required
           />
-          <input 
-            v-model="password" 
-            type="password" 
-            placeholder="Password" 
-            class="ios-input" 
-            required 
+          <input
+            v-model="password"
+            type="password"
+            placeholder="Password"
+            class="ios-input"
+            required
           />
         </div>
-        
+
         <button type="submit" class="ios-btn-primary">Log In</button>
-        
+
         <transition name="fade">
           <p v-if="message" :class="['status-msg', { success: !error, error: error }]">
             {{ message }}
@@ -40,7 +40,7 @@ import axios from "axios";
 
 export default {
   name: "UserLogin",
-  emits: ["login-success"], // Fixed: matched the event name used in App.vue
+  emits: ["login-success"],
   data() {
     return {
       username: "",
@@ -61,7 +61,6 @@ export default {
         });
 
         this.message = "Success! Redirecting...";
-        // Emit 'login-success' to match App.vue listener
         setTimeout(() => {
           this.$emit("login-success", response.data);
         }, 1000);
@@ -181,14 +180,20 @@ h2 {
   min-height: 20px;
 }
 
-.success { color: #34c759; }
-.error { color: #ff3b30; }
+.success {
+  color: #34c759;
+}
+.error {
+  color: #ff3b30;
+}
 
 /* Transitions */
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.3s;
 }
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

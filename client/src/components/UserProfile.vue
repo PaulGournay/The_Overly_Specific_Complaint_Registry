@@ -66,7 +66,7 @@ export default {
 
       selectedPfp: this.user.pfp || "pfp1.jpeg",
       username: this.user.username,
-      email: this.user.email, // Initialize with current email
+      email: this.user.email,
       message: "",
       error: false,
     };
@@ -84,7 +84,7 @@ export default {
           "http://localhost:3000/api/users/profile",
           {
             username: this.username,
-            email: this.email, // Send updated email
+            email: this.email,
             pfp: this.selectedPfp,
           },
           {

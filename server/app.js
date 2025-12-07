@@ -54,7 +54,7 @@ function authenticateToken(req, res, next) {
 
   jwt.verify(token, secretKey, (err, user) => {
     if (err) return res.sendStatus(403);
-    req.user = user; // user object now includes id, username, and role
+    req.user = user;
     next();
   });
 }
