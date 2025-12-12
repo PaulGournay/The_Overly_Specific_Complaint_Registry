@@ -507,6 +507,31 @@ app.delete(
   }
 );
 
+// Delete a complaint (Archivist only)
+app.delete(
+  "/api/complaints/:id",
+  authenticateToken,
+  archivistOnly,
+  async (req, res) => {
+    try {
+      const id = req.params.id;
+
+      // Delete all votes on this complaint
+      await dbPool.query("DELETE FROM complaint_votes WHERE complaint_id = ?", [
+        id,
+      ]);
+
+      // Delete the complaint itself
+      await dbPool.query("DELETE FROM complaints WHERE id = ?", [id]);
+
+      res.json({ message: "Complaint archived successfully." });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error archiving complaint." });
+    }
+  }
+);
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
